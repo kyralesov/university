@@ -1,4 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15D21" minimumToolsVersion="Automatic">
+    <entity name="EKCourse" representedClassName="EKCourseMO" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="students" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EKStudent" inverseName="courses" inverseEntity="EKStudent" syncable="YES"/>
+        <relationship name="teacher" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EKTeacher" inverseName="courses" inverseEntity="EKTeacher" syncable="YES"/>
+        <relationship name="universities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EKUniversity" inverseName="courses" inverseEntity="EKUniversity" syncable="YES"/>
+    </entity>
+    <entity name="EKStudent" representedClassName="EKStudentMO" parentEntity="EKUser" syncable="YES">
+        <attribute name="score" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="courses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EKCourse" inverseName="students" inverseEntity="EKCourse" syncable="YES"/>
+        <relationship name="teachers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EKTeacher" inverseName="students" inverseEntity="EKTeacher" syncable="YES"/>
+        <relationship name="university" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EKUniversity" inverseName="students" inverseEntity="EKUniversity" syncable="YES"/>
+    </entity>
+    <entity name="EKTeacher" representedClassName="EKTeacherMO" parentEntity="EKUser" syncable="YES">
+        <attribute name="rank" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="courses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="EKCourse" inverseName="teacher" inverseEntity="EKCourse" syncable="YES"/>
+        <relationship name="students" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EKStudent" inverseName="teachers" inverseEntity="EKStudent" syncable="YES"/>
+        <relationship name="universities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EKUniversity" inverseName="teachers" inverseEntity="EKUniversity" syncable="YES"/>
+    </entity>
+    <entity name="EKUniversity" representedClassName="EKUniversityMO" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="courses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EKCourse" inverseName="universities" inverseEntity="EKCourse" syncable="YES"/>
+        <relationship name="students" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="EKStudent" inverseName="university" inverseEntity="EKStudent" syncable="YES"/>
+        <relationship name="teachers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EKTeacher" inverseName="universities" inverseEntity="EKTeacher" syncable="YES"/>
+    </entity>
+    <entity name="EKUser" representedClassName="EKUserMO" isAbstract="YES" syncable="YES">
+        <attribute name="dateOfBirth" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="EKCourse" positionX="1789" positionY="234" width="128" height="103"/>
+        <element name="EKStudent" positionX="1969" positionY="296" width="128" height="103"/>
+        <element name="EKTeacher" positionX="1620" positionY="414" width="128" height="103"/>
+        <element name="EKUser" positionX="1791" positionY="549" width="128" height="103"/>
+        <element name="EKUniversity" positionX="1447" positionY="311" width="128" height="103"/>
+    </elements>
 </model>
